@@ -34,6 +34,16 @@ async function getListItems() {
   // console.log("Rows are: ", data.rows);
 }
 
+const currentDate = new Date();
+
+const options = { 
+  weekday: 'long', 
+  day: 'numeric', 
+  month: 'long'
+};
+
+const day = currentDate.toLocaleDateString('en-US', options);
+
 app.get("/", async (req, res) => {
   let items = [];
   const listData = await getListItems();
@@ -41,7 +51,7 @@ app.get("/", async (req, res) => {
     items.push(item);
   });
   res.render("index.ejs", {
-    listTitle: "Today",
+    listTitle: day,
     listItems: items,
   });
 });
